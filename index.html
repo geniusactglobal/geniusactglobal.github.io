@@ -131,6 +131,77 @@
     .twit:hover #blk {
       fill: black;
     }
+
+    /* Fixes for GENIUS Act section and banner overlap */
+    .dno {
+      background-color: #25347A;
+      color: white;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 15px;
+      flex-shrink: 0;
+      border-radius: 2px;
+    }
+
+    .banner-overlap .box-shadow {
+      width: 50%;
+      max-width: 600px;
+    }
+    
+    .dform {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .dform_label {
+      display: none !important;
+    }
+
+    .dform_element {
+      flex: 1;
+      margin-bottom: 0 !important;
+    }
+
+    .field_zip {
+      flex: 0 0 100px;
+    }
+
+    .dform_container input.text {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .submit_button .button {
+      background: transparent;
+      color: #25347A;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .submit_button .button::after {
+      content: '\2192';
+    }
+
+    .btn-outline-red {
+      border: 2px solid #D71F2D !important;
+      color: #D71F2D !important;
+      background-color: transparent !important;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
   </style>
 
   <a href="#main" id="skipnav">Skip to main content</a>
@@ -285,9 +356,7 @@
               <a href="contribute.html" class="level-1-link">Events</a>
             </li>
 
-            <li class="level-1">
-              <a href="dashboard.html" class="level-1-link">Financial Dashboard</a>
-            </li>
+
             <!-- <li class="level-1 has-dropdown-menu"> -->
             <li class="level-1">
               <a href="contribute.html" class="level-1-link">Get Involved</a>
@@ -330,8 +399,8 @@
               DONALD J. TRUMP, President of the United States
             </p>
             <a target="_blank" href="contribute.html"
-              class="contri btn arrow-btn arrow-btn-red btn-filled">Participate</a>
-            <a href="sms:+17197253216" class="b-blue btn arrow-btn arrow-btn-red btn-filled">CONTACT US</a>
+              class="contri btn arrow-btn arrow-btn-red btn-filled">PARTICIPATE</a>
+            <a href="sms:+17197253216" class="btn" style="background-color: #25347A; color: white;">CONTACT US</a>
           </div>
         </div>
         <div class="social">
@@ -405,13 +474,10 @@
       <section class="banner-overlap">
         <div class="container d-flex">
           <div class="box-shadow mw-100">
-            <div class="bg-red color-white py-5 px-7 p-mobile-5vw text-center">
-              <h2 class="title-lrg-2">Join Our Movement!</h2>
+            <div class="bg-red color-white py-5 px-7 p-mobile-5vw text-left">
+              <h2 class="title-lrg-2 m-0" style="font-weight: 800;">Join Our Movement!</h2>
             </div>
             <div class="p-5 bg-white p-mobile-5vw">
-              <h3 class="title-med-1 color-blue text-center mb-4">
-
-              </h3>
               <div class="signup-form centered dark w-100 d-flex justify-content-center">
                 <form id="new_submission" class=" join_mini" action="#" enctype="multipart/form-data">
                   <div class='hiddenFields'>
@@ -424,22 +490,20 @@
 
                   <div class="dform">
                     <div class="dform_element dform_email dftop_label field_email dform_required" id="forms_field_15">
-                      <label class="dform_label" for="ddform_15">Email <span class="req">*</span></label>
                       <div class="dform_container"><input type="email" name="fields[15]" value=""
                           class="text  required validate[required,custom[email]] " id="ddform_15"
-                          placeholder="Enter your Email" data-placeholder="Enter your Email" /></div>
+                          placeholder="ENTER YOUR EMAIL" data-placeholder="ENTER YOUR EMAIL" /></div>
                     </div>
                     <div class="dform_element dform_text_input dftop_label field_zip dform_required"
                       id="forms_field_22">
-                      <label class="dform_label" for="ddform_22">Zip <span class="req">*</span></label>
                       <div class="dform_container"><input type="text" name="fields[22]" value=""
-                          class="text required validate[required] " id="ddform_22" placeholder="Zip"
-                          data-placeholder="Zip" /></div>
+                          class="text required validate[required] " id="ddform_22" placeholder="ZIP"
+                          data-placeholder="ZIP" /></div>
                     </div>
                     <div class="dform_element submit_button">
                       <div class="dform_container">
-                        <div class="dfinput_full"><input type="submit" class="button" name="submit_button" value="Save"
-                            data-value="Save" data-wait="Verifying..." /></div>
+                        <div class="dfinput_full"><button type="submit" class="button" name="submit_button"
+                            data-wait="Verifying..."></button></div>
                       </div>
                     </div>
                   </div>
@@ -511,7 +575,7 @@
                   The law is signed, the system is ready, and now America is calling on you to step up.
                 </p>
                 <!-- <a href="/platform" class="btn arrow-btn arrow-btn-red" style="margin-top: 2em">Platform</a> -->
-                <a href="contribute.html" class="btn arrow-btn arrow-btn-red" style="margin-top: 2em">Participate</a>
+                <a href="contribute.html" class="btn arrow-btn btn-outline-red" style="margin-top: 2em">PARTICIPATE</a>
               </div>
             </div>
             <div class="col-6 image d-flex justify-content-end">
