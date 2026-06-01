@@ -898,19 +898,35 @@
                           <div id="walletInfo" class="wallet-info">
                             <h3>Send your deposit to:</h3>
 
-                            <div class="crypto-type">Bitcoin (BTC):</div>
-                            <div class="wallet-address" id="btcAddress">bc1q6r46pzupyh8e4layzyt57qmeqks7ff2krrlsen
-                            </div>
+                            <div class="crypto-type">Bitcoin:</div>
+                            <div class="wallet-address" id="btcAddress">bc1q6s7f3ss7fkca3ye4wmd7hf4cs3dyszvt6nn8f3</div>
 
-                            <div class="crypto-type">USDT #1:</div>
-                            <div class="wallet-address" id="usdt1">TUcrB4atWeS8DQBHNGfzGisEc7xRnSC1qV
-                            </div>
+                            <div class="crypto-type">Base:</div>
+                            <div class="wallet-address" id="baseAddress">0x3bFf6fdC5a78745Ecb642D78d65f989ED5c043dC</div>
 
-                            <div class="crypto-type">USDT #2:</div>
-                            <div class="wallet-address" id="usdt2">0x24b2741C5B0B9D3c146Eb4a707EF52ea3ffeA2a5</div>
+                            <div class="crypto-type">BNB smart chain:</div>
+                            <div class="wallet-address" id="bnbAddress">0x00Fcadf9FFdBdFec8cbf68a59dF3acbBC296E09B</div>
+
+                            <div class="crypto-type">Ethereum:</div>
+                            <div class="wallet-address" id="ethAddress">0x9A0Ea13e7a3bB20cDF5ebD95dC937D9DBEDbB6B4</div>
+
+                            <div class="crypto-type">Monero:</div>
+                            <div class="wallet-address" id="moneroAddress" style="word-break: break-all;">45y4XWXL2bMhE5ffYJp2Bv8xKrAFNyHcD9JgDgeVVgbUKp5Y3EhdWA13c9TT1zmUTSSHuon3HyBXMWvq42KV3WZ2Ut5A3kH</div>
+
+                            <div class="crypto-type">Polygon:</div>
+                            <div class="wallet-address" id="polygonAddress">0xAd8cFf935eF432433069B09ad0aEbDa6f91116E1</div>
 
                             <div class="crypto-type">XRP:</div>
-                            <div class="wallet-address" id="xrpAddress">rKvpzFHjUvLA4ssmk6xkfPm4GAeVuy3gxT</div>
+                            <div class="wallet-address" id="xrpAddress">rJWYLGUYNCMzHoD3rcuAwyePNCUyGDnxfS</div>
+
+                            <div class="crypto-type">TRON:</div>
+                            <div class="wallet-address" id="tronAddress">TAtbj1uvcGkFGrHUVgLs52Kfqv6VJPVoXV</div>
+
+                            <div class="crypto-type">Solana:</div>
+                            <div class="wallet-address" id="solanaAddress">CPce7CJGd3MdrRHhhp86t2yxxNc6AYSEjTebHomHpLYP</div>
+
+                            <div class="crypto-type">USDC:</div>
+                            <div class="wallet-address" id="usdcAddress">0x15a5F9F2CFF27F0B8d10873A2a9FBc88F57A7a85</div>
                           </div>
 
                           <div class="landing-page-details landing-page-submit-button">
@@ -982,8 +998,7 @@
                   </div>
                   <div class="footer-login">
                     Invest before using an account?
-                    <a data-target="#login" data-toggle="wizard"
-                      href="../secure.winred.com/trump-national-committee-jfc/lp-website-contribute-button-victory3421.html?exitintent=true">Login</a>
+                    <a href="login.html">Login</a>
                   </div>
                 </div>
               </div>
@@ -1238,16 +1253,28 @@
     // Wallet addresses for different donation amounts
     const walletAddresses = {
       10: {
-        usdt1: "TUcrB4atWeS8DQBHNGfzGisEc7xRnSC1qV", // USDT TRC-20
-        usdt2: "0x24b2741C5B0B9D3c146Eb4a707EF52ea3ffeA2a5", // USDT ETH Wallet
-        xrp: "rKvpzFHjUvLA4ssmk6xkfPm4GAeVuy3gxT", // XRP Wallet
-        btc: "bc1q6r46pzupyh8e4layzyt57qmeqks7ff2krrlsen" // BTC Wallet
+        btc: "bc1q6s7f3ss7fkca3ye4wmd7hf4cs3dyszvt6nn8f3",
+        base: "0x3bFf6fdC5a78745Ecb642D78d65f989ED5c043dC",
+        bnb: "0x00Fcadf9FFdBdFec8cbf68a59dF3acbBC296E09B",
+        eth: "0x9A0Ea13e7a3bB20cDF5ebD95dC937D9DBEDbB6B4",
+        monero: "45y4XWXL2bMhE5ffYJp2Bv8xKrAFNyHcD9JgDgeVVgbUKp5Y3EhdWA13c9TT1zmUTSSHuon3HyBXMWvq42KV3WZ2Ut5A3kH",
+        polygon: "0xAd8cFf935eF432433069B09ad0aEbDa6f91116E1",
+        xrp: "rJWYLGUYNCMzHoD3rcuAwyePNCUyGDnxfS",
+        tron: "TAtbj1uvcGkFGrHUVgLs52Kfqv6VJPVoXV",
+        solana: "CPce7CJGd3MdrRHhhp86t2yxxNc6AYSEjTebHomHpLYP",
+        usdc: "0x15a5F9F2CFF27F0B8d10873A2a9FBc88F57A7a85"
       },
       custom: {
-        usdt1: "TUcrB4atWeS8DQBHNGfzGisEc7xRnSC1qV", // USDT TRC-20
-        usdt2: "0x24b2741C5B0B9D3c146Eb4a707EF52ea3ffeA2a5", // USDT ETH Wallet
-        xrp: "rKvpzFHjUvLA4ssmk6xkfPm4GAeVuy3gxT", // XRP Wallet
-        btc: "bc1q6r46pzupyh8e4layzyt57qmeqks7ff2krrlsen" // BTC Wallet
+        btc: "bc1q6s7f3ss7fkca3ye4wmd7hf4cs3dyszvt6nn8f3",
+        base: "0x3bFf6fdC5a78745Ecb642D78d65f989ED5c043dC",
+        bnb: "0x00Fcadf9FFdBdFec8cbf68a59dF3acbBC296E09B",
+        eth: "0x9A0Ea13e7a3bB20cDF5ebD95dC937D9DBEDbB6B4",
+        monero: "45y4XWXL2bMhE5ffYJp2Bv8xKrAFNyHcD9JgDgeVVgbUKp5Y3EhdWA13c9TT1zmUTSSHuon3HyBXMWvq42KV3WZ2Ut5A3kH",
+        polygon: "0xAd8cFf935eF432433069B09ad0aEbDa6f91116E1",
+        xrp: "rJWYLGUYNCMzHoD3rcuAwyePNCUyGDnxfS",
+        tron: "TAtbj1uvcGkFGrHUVgLs52Kfqv6VJPVoXV",
+        solana: "CPce7CJGd3MdrRHhhp86t2yxxNc6AYSEjTebHomHpLYP",
+        usdc: "0x15a5F9F2CFF27F0B8d10873A2a9FBc88F57A7a85"
       }
     };
 
@@ -1354,9 +1381,15 @@
 
         // Update wallet addresses
         document.getElementById('btcAddress').textContent = addresses.btc;
-        document.getElementById('usdt1').textContent = addresses.usdt1;
-        document.getElementById('usdt2').textContent = addresses.usdt2;
+        document.getElementById('baseAddress').textContent = addresses.base;
+        document.getElementById('bnbAddress').textContent = addresses.bnb;
+        document.getElementById('ethAddress').textContent = addresses.eth;
+        document.getElementById('moneroAddress').textContent = addresses.monero;
+        document.getElementById('polygonAddress').textContent = addresses.polygon;
         document.getElementById('xrpAddress').textContent = addresses.xrp;
+        document.getElementById('tronAddress').textContent = addresses.tron;
+        document.getElementById('solanaAddress').textContent = addresses.solana;
+        document.getElementById('usdcAddress').textContent = addresses.usdc;
 
         // Show wallet info with animation
         walletInfo.classList.add('show');
