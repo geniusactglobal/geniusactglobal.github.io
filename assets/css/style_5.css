@@ -1,0 +1,1 @@
+.animated-override-button,div.color-button.btn[data-name="amt3"]:not(.selected){background-color:#ff0000}.animated-override-button:hover,.animated-override-button:active,.animated-override-button:focus,div.color-button.btn[data-name="amt3"]:hover,div.color-button.btn[data-name="amt3"]:active,div.color-button.btn[data-name="amt3"]:focus{filter:brightness(95%)}

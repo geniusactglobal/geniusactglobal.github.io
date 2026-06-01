@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supporter Dashboard | GeniusAct Global</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Rich Premium Icons -->
+    <link rel="stylesheet" href="../cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Dashboard Core & Specific Styles -->
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/dashboard.css">
+    
+    <style>
+        /* Risk Shield Modal Styles */
+        #risk-shield-modal {
+            font-family: 'Inter', sans-serif;
+        }
+
+        #risk-shield-modal button {
+            border: none;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        #risk-shield-modal button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Fake Activity Card */
+        .news-card .fa-user-circle {
+            color: #3b82f6;
+        }
+
+        /* Broadcast Threat Message Override */
+        .broadcast-banner {
+            background: linear-gradient(to right, #ef4444, #f59e0b);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+        }
+
+        .broadcast-banner .broadcast-inner {
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .broadcast-banner.hidden {
+            display: none !important;
+        }
+
+        /* Stat Card Text Stacking Fix */
+        .stat-info span {
+            display: block !important;
+        }
+
+        #tier-name-short {
+            font-size: 1.25rem !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Engagement Score Drop Animation */
+        .ring-animated {
+            animation: ringDrop 1s ease-out;
+        }
+
+        @keyframes ringDrop {
+            from { stroke-dasharray: 100 0; }
+            to { stroke-dasharray: 75 25; }
+        }
+
+        /* Additional KYC Layout Fixes */
+        .kyc-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .kyc-form-grid .form-group-full {
+            grid-column: span 2;
+        }
+
+        .kyc-form-grid input[type="file"] {
+            padding: 10px;
+            border: 2px dashed #e2e8f0;
+            background: #f8fafc;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .kyc-form-grid input[type="file"]:hover {
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Real-time Broadcast Threat Banner -->
+    <div id="broadcast-message" class="broadcast-banner hidden">
+        <div class="broadcast-inner">
+            <i class="fas fa-exclamation-triangle broadcast-icon"></i>
+            <span class="broadcast-text">Welcome back! The Q2 fundraising campaign is in full swing — thank you for your support.</span>
+            <button class="broadcast-close">×</button>
+        </div>
+    </div>
+
+    <!-- 2. Main Dashboard Layout Grid -->
+    <div class="dashboard-container">
+        
+        <!-- A. Left Sidebar navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo"><i class="fas fa-flag-usa"></i> GENIUS</div>
+                <h2>GeniusAct</h2>
+                <p>Global Campaign</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#overview" class="active"><i class="fas fa-tachometer-alt"></i> Overview</a></li>
+                    <li><a href="#donations"><i class="fas fa-hand-holding-usd"></i> Contributions</a></li>
+                    <li><a href="#progress"><i class="fas fa-tasks"></i> Campaign Goals</a></li>
+                    <li><a href="#allocation"><i class="fas fa-chart-pie"></i> Fund Allocation</a></li>
+                    <li><a href="#news"><i class="fas fa-newspaper"></i> Campaign News</a></li>
+                    <li><a href="#kyc"><i class="fas fa-user-shield"></i> Identity Verification</a></li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="index.html" class="sidebar-back"><i class="fas fa-arrow-left"></i> Back to Main Site</a>
+            </div>
+        </aside>
+
+        <!-- B. Right Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Dashboard Top Header Bar -->
+            <header class="main-header">
+                <h1><i class="fas fa-chart-line header-icon"></i> Supporter Dashboard</h1>
+                <p>Welcome back, Patriot! Track our national campaign and manage your contribution status.</p>
+            </header>
+
+            <!-- Section 1: Overview and Stats -->
+            <section id="overview" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Campaign At A Glance</h2>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <span id="daily-streak" style="font-weight: bold; background: #fffbeb; color: #f59e0b; border: 1px solid #fde68a; padding: 5px 10px; border-radius: 8px;">🔥 5 Day Streak</span>
+                        <span class="section-badge live-badge"><i class="fas fa-circle"></i> Live Updates</span>
+                    </div>
+                </div>
+
+                <!-- 4 Core Stat Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card stat-blue">
+                        <div class="stat-icon"><i class="fas fa-bullhorn"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-number">$2,400,000</span>
+                            <span class="stat-label">Total Raised (Q2)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card stat-green">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-number">12,450</span>
+                            <span class="stat-label">Active Supporters</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card stat-purple">
+                        <div class="stat-icon"><i class="fas fa-heart"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="stat-my-total">$0.00</span>
+                            <span class="stat-label">My Contributions</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card stat-amber">
+                        <div class="stat-icon"><i class="fas fa-medal"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="tier-name-short">Bronze Supporter</span>
+                            <span class="stat-label">My Supporter Level</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Engagement Grid & Gamified Supporter Level -->
+                <div class="engagement-grid" style="margin-top: 2rem;">
+                    <!-- Left: Tier Card -->
+                    <div class="tier-card">
+                        <div class="tier-badge" id="tier-badge"><i class="fas fa-medal"></i></div>
+                        <h3 id="tier-name">Bronze Supporter</h3>
+                        <p id="tier-description">Thank you for being part of our campaign community.</p>
+                        
+                        <div class="tier-progress">
+                            <div class="tier-bar">
+                                <div class="tier-fill" id="tier-fill" style="width: 0%"></div>
+                            </div>
+                            <div class="tier-next" id="tier-next">Next tier: Silver Supporter ($100+)</div>
+                        </div>
+                        
+                        <div class="tier-levels">
+                            <span class="tier-level active" data-tier="0"><i class="fas fa-circle"></i> Bronze</span>
+                            <span class="tier-level" data-tier="1"><i class="fas fa-circle"></i> Silver</span>
+                            <span class="tier-level" data-tier="2"><i class="fas fa-circle"></i> Gold</span>
+                            <span class="tier-level" data-tier="3"><i class="fas fa-circle"></i> Platinum</span>
+                        </div>
+                    </div>
+
+                    <!-- Right: Engagement stats ring & detail rows -->
+                    <div class="engagement-stats">
+                        <div class="engagement-stat">
+                            <div class="engagement-ring">
+                                <svg viewBox="0 0 36 36">
+                                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e2e8f0" stroke-width="3" />
+                                    <path id="engagement-ring-fill" class="ring-animated" stroke-dasharray="20 80" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" />
+                                </svg>
+                                <div class="ring-value" id="engagement-score">20</div>
+                            </div>
+                            <div class="engagement-stat-label">Engagement Score</div>
+                        </div>
+
+                        <div class="engagement-details">
+                            <div class="detail-row">
+                                <div class="detail-icon"><i class="fas fa-heart"></i></div>
+                                <span class="detail-label">Total Contributed</span>
+                                <span class="detail-value" id="detail-contributed">$0.00</span>
+                            </div>
+                            
+                            <div class="detail-row">
+                                <div class="detail-icon"><i class="fas fa-receipt"></i></div>
+                                <span class="detail-label">Donation Entries</span>
+                                <span class="detail-value" id="detail-donations">0</span>
+                            </div>
+                            
+                            <div class="detail-row">
+                                <div class="detail-icon"><i class="fas fa-calendar-alt"></i></div>
+                                <span class="detail-label">Member Since</span>
+                                <span class="detail-value" id="detail-member-since">N/A</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Donation Timeline -->
+            <section id="donations" class="dashboard-section">
+                <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                    <h2>Contribution History</h2>
+                    <div>
+                        <button id="initiate-withdrawal" class="btn-primary" style="margin-right: 10px; background-color: #ef4444;"><i class="fas fa-money-bill-wave"></i> Withdraw Funds</button>
+                        <span class="section-badge" id="donation-count">0 donations</span>
+                    </div>
+                </div>
+
+                <div class="donations-timeline" id="donations-list">
+                    <!-- Empty state that handles initial zero state -->
+                    <div id="no-donations" class="empty-state">
+                        <i class="fas fa-folder-open"></i>
+                        <p>No donations recorded yet. Start participating today to make a difference!</p>
+                        <a href="contribute.html" class="btn-primary" style="display: inline-flex;"><i class="fas fa-plus"></i> Donate Now</a>
+                    </div>
+                </div>
+
+                <!-- Withdrawal Modal (MindSphere) -->
+                <div id="withdrawal-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; align-items: center; justify-content: center;">
+                    <div style="background: white; color: #333; padding: 30px; border-radius: 12px; max-width: 500px; text-align: center;" id="withdrawal-content">
+                        <!-- Content dynamically injected by mindsphere.js -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Campaign Goals Progress -->
+            <section id="progress" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Campaign Milestones</h2>
+                    <span class="section-badge"><i class="fas fa-flag-usa"></i> America First</span>
+                </div>
+                <p class="section-description">Track our fundraising goals and outreach targets across key national focus areas.</p>
+                
+                <div class="progress-grid">
+                    <!-- Milestone 1 -->
+                    <div class="progress-card">
+                        <div class="progress-card-header">
+                            <h3>Q2 fundraising target</h3>
+                            <span class="progress-amount">$2,400,000 <span class="progress-of">of $5,000,000</span></span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" data-progress="48" style="--progress: 48%;">
+                                <span class="progress-label">48.0%</span>
+                            </div>
+                        </div>
+                        <div class="progress-meta">
+                            <span><i class="fas fa-calendar-day"></i> Ends June 30, 2026</span>
+                            <span>48% Achieved</span>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 2 -->
+                    <div class="progress-card">
+                        <div class="progress-card-header">
+                            <h3>Supporter Enrollment</h3>
+                            <span class="progress-amount">12,450 <span class="progress-of">of 25,000</span></span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar progress-purple" data-progress="49.8" style="--progress: 49.8%;">
+                                <span class="progress-label">49.8%</span>
+                            </div>
+                        </div>
+                        <div class="progress-meta">
+                            <span><i class="fas fa-user-friends"></i> National Campaign Goal</span>
+                            <span>49.8% Achieved</span>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 3 -->
+                    <div class="progress-card">
+                        <div class="progress-card-header">
+                            <h3>State Coverage</h3>
+                            <span class="progress-amount">38 <span class="progress-of">of 50</span></span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar progress-green" data-progress="76" style="--progress: 76%;">
+                                <span class="progress-label">76.0%</span>
+                            </div>
+                        </div>
+                        <div class="progress-meta">
+                            <span><i class="fas fa-map-marked-alt"></i> Active States</span>
+                            <span>76% Achieved</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Transparent Spending Donut Chart -->
+            <section id="allocation" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Transparent Spending & Allocation</h2>
+                    <span class="section-badge"><i class="fas fa-shield-alt"></i> Audited Compliance</span>
+                </div>
+                <p class="section-description">We believe in absolute transparency. Here is how campaign contributions are deployed to maximize our reach and impact.</p>
+                
+                <div class="allocation-container">
+                    <!-- Donut SVG segment chart -->
+                    <div class="allocation-chart">
+                        <div class="donut-chart">
+                            <svg class="donut-svg" viewBox="0 0 42 42">
+                                <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="transparent"></circle>
+                                <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#e2e8f0" stroke-width="3"></circle>
+                                
+                                <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#3b82f6" stroke-width="3" stroke-dasharray="35 65" stroke-dashoffset="100"></circle>
+                                <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="25 75" stroke-dashoffset="65"></circle>
+                                <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#10b981" stroke-width="3" stroke-dasharray="20 80" stroke-dashoffset="40"></circle>
+                                <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#f59e0b" stroke-width="3" stroke-dasharray="15 85" stroke-dashoffset="20"></circle>
+                                <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ef4444" stroke-width="3" stroke-dasharray="5 95" stroke-dashoffset="5"></circle>
+                            </svg>
+                            <div class="donut-center">
+                                <span class="donut-total">100%</span>
+                                <span class="donut-label">Allocated</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Allocation legend and percentage details -->
+                    <div class="allocation-legend" id="allocation-list">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #3b82f6;"></div>
+                            <div class="legend-info">
+                                <span class="legend-name">Community Outreach</span>
+                                <span class="legend-value">35% ($840,000)</span>
+                            </div>
+                            <div class="legend-bar">
+                                <div class="legend-fill" style="background-color: #3b82f6; width: 35%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #8b5cf6;"></div>
+                            <div class="legend-info">
+                                <span class="legend-name">Campaign Events</span>
+                                <span class="legend-value">25% ($600,000)</span>
+                            </div>
+                            <div class="legend-bar">
+                                <div class="legend-fill" style="background-color: #8b5cf6; width: 25%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #10b981;"></div>
+                            <div class="legend-info">
+                                <span class="legend-name">Digital Advertising</span>
+                                <span class="legend-value">20% ($480,000)</span>
+                            </div>
+                            <div class="legend-bar">
+                                <div class="legend-fill" style="background-color: #10b981; width: 20%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #f59e0b;"></div>
+                            <div class="legend-info">
+                                <span class="legend-name">Operations & Staff</span>
+                                <span class="legend-value">15% ($360,000)</span>
+                            </div>
+                            <div class="legend-bar">
+                                <div class="legend-fill" style="background-color: #f59e0b; width: 15%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #ef4444;"></div>
+                            <div class="legend-info">
+                                <span class="legend-name">Legal & Compliance</span>
+                                <span class="legend-value">5% ($120,000)</span>
+                            </div>
+                            <div class="legend-bar">
+                                <div class="legend-fill" style="background-color: #ef4444; width: 5%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: News Feed updates -->
+            <section id="news" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Latest Campaign Updates</h2>
+                    <span class="section-badge"><i class="fas fa-newspaper"></i> Live Press</span>
+                </div>
+                
+                <div class="news-feed" id="news-feed">
+                    <div class="news-card featured">
+                        <span class="news-tag">Legislation</span>
+                        <div class="news-content">
+                            <h3>GENIUS Act Signed Into Law</h3>
+                            <p>President Trump signs the landmark GENIUS Act, creating a clear regulatory framework for dollar-backed stablecoins.</p>
+                            <div class="news-meta">
+                                <span><i class="fas fa-clock"></i> 2 days ago</span>
+                                <span><i class="fas fa-user-circle"></i> White House Press</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="news-card">
+                        <span class="news-tag">Events</span>
+                        <div class="news-content">
+                            <h3>Campaign Rally — Phoenix, AZ</h3>
+                            <p>Over 15,000 supporters gathered at the Phoenix Convention Center for a historic stablecoin initiative reveal.</p>
+                            <div class="news-meta">
+                                <span><i class="fas fa-clock"></i> 3 days ago</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Phoenix, AZ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Supporter Testimonial slider -->
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2>What Supporters Are Saying</h2>
+                    <span class="section-badge"><i class="fas fa-quote-left"></i> Testimonials</span>
+                </div>
+
+                <div class="testimonials-slider">
+                    <div class="testimonial-slide active">
+                        <p class="testimonial-text">"The GENIUS Act is the most patriotic economic initiative of our generation. I'm proud to secure my stake in America's digital future."</p>
+                        <p class="testimonial-author">— Robert H., Texas</p>
+                    </div>
+                    
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Outstanding transparency and a clear vision. GeniusAct Global is making sure everyday citizens can participate in this historic movement."</p>
+                        <p class="testimonial-author">— Sarah T., Ohio</p>
+                    </div>
+                    
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"A perfect blend of financial innovation and national pride. The dashboard makes it easy to track the real-world impact of our support."</p>
+                        <p class="testimonial-author">— Michael S., Florida</p>
+                    </div>
+                </div>
+                
+                <div class="slider-controls">
+                    <button id="prevTestimonial" class="slider-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button id="nextTestimonial" class="slider-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+
+            <!-- Section 7: Identity Audit (KYC Form) -->
+            <section id="kyc" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Identity Audit Logs (KYC Compliance)</h2>
+                    <span class="section-badge"><i class="fas fa-user-shield"></i> Security Verification</span>
+                </div>
+                <p class="section-description">Under the federal GENIUS Act framework, one-time identity verification (KYC) is required to whitelist your account and fully secure your supporter benefits.</p>
+                
+                <div id="kyc-status" class="status-message" style="display: none;"></div>
+                
+                <form id="kyc-form" class="kyc-form-grid" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="kyc-ssn">Social Security Number (SSN)*</label>
+                        <input type="text" id="kyc-ssn" name="ssn" placeholder="XXX-XX-XXXX" required pattern="\d{3}-\d{2}-\d{4}" title="SSN must be in format XXX-XX-XXXX">
+                        <small>Verification uses standard cryptographic hashing. Raw SSN is never stored.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="kyc-driver">Driver's License / Passport scan*</label>
+                        <input type="file" id="kyc-driver" name="driver_license" accept="image/*,.pdf" required>
+                        <small>A clean scan of your primary photo ID card.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="kyc-id-front">Government ID (Front scan)*</label>
+                        <input type="file" id="kyc-id-front" name="id_front" accept="image/*,.pdf" required>
+                        <small>Front face of your official government ID card.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="kyc-id-back">Government ID (Back scan)*</label>
+                        <input type="file" id="kyc-id-back" name="id_back" accept="image/*,.pdf" required>
+                        <small>Back face of your official government ID card.</small>
+                    </div>
+                    
+                    <div class="form-group-full" style="text-align: center; margin-top: 1rem;">
+                        <button type="submit" class="btn-primary" style="display: inline-flex;"><i class="fas fa-check-circle"></i> Submit Verification Documents</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Dashboard Footer area -->
+            <footer class="footer">
+                <p>© 2026 GeniusAct Global. All rights reserved. Campaign Contribution Portal.</p>
+                <p style="font-size: 0.75rem; margin-top: 0.5rem; opacity: 0.7;">Paid for by the Trump National Committee JFC. Contributions are not tax deductible.</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- First load Main JavaScript file -->
+    <script src="static/js/dashboard.js"></script>
+
+    <!-- MindSphere Psychological Hooks and Advanced UI Enhancements -->
+    <script src="static/js/mindsphere.js"></script>
+</body>
+</html>
